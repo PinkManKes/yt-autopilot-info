@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — YT Autopilot</title>
+<style>
+  :root { --fg:#1a1a1a; --muted:#555; --accent:#2b6cb0; --bg:#ffffff; --card:#f7f7f9; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); line-height:1.6; max-width:780px; margin:0 auto; padding:2.5rem 1.5rem; }
+  h1 { font-size: 1.9rem; margin-bottom: 0.3rem; }
+  h2 { font-size: 1.3rem; margin-top: 2rem; margin-bottom: 0.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.3rem; }
+  h3 { font-size: 1.05rem; margin-top: 1.4rem; margin-bottom: 0.3rem; }
+  .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  nav a { margin-right: 1rem; color: var(--accent); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  nav { margin-bottom: 2rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+  th, td { border: 1px solid #ddd; padding: 0.5rem 0.8rem; text-align: left; vertical-align: top; }
+  th { background: #f0f0f0; }
+  code { background: #eef; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms of Service</a>
+</nav>
+
+<h1>Privacy Policy</h1>
+<p class="lead">Last updated: 2026-07-01. Effective from: 2026-07-01.</p>
+
+<h2>Overview</h2>
+<p>YT Autopilot ("the Tool") is a personal automation tool that operates locally on the developer's own hardware. It uses the YouTube Data API v3 solely to upload videos to the authenticated user's own YouTube channel. This policy explains what data is handled and how.</p>
+
+<h2>Data collected and used</h2>
+<table>
+<tr><th>Data</th><th>Purpose</th><th>Storage</th><th>Sharing</th></tr>
+<tr>
+<td>Google OAuth refresh token</td>
+<td>To obtain short-lived access tokens for YouTube video upload operations only</td>
+<td>Local file (<code>~/yt-autopilot/pipeline/config/yt_token.json</code>) with owner-only read permission (chmod 600)</td>
+<td>Never shared. Only transmitted to Google's own OAuth endpoints.</td>
+</tr>
+<tr>
+<td>Google account email (from OAuth)</td>
+<td>Displayed only during OAuth consent; not stored by the Tool</td>
+<td>Not stored beyond the OAuth session</td>
+<td>Never shared</td>
+</tr>
+<tr>
+<td>YouTube channel ID</td>
+<td>Target channel for video upload</td>
+<td>Not stored; inferred from OAuth token at upload time</td>
+<td>Never shared</td>
+</tr>
+</table>
+
+<h2>Data the Tool does NOT collect</h2>
+<ul>
+<li>User contacts, calendars, drive files, or any other Google service data</li>
+<li>YouTube analytics, subscribers, comments, or watch history</li>
+<li>Any other user's channel or content</li>
+<li>Personal information beyond what OAuth provides for the requested scope</li>
+</ul>
+
+<h2>Scope and authorization</h2>
+<p>The Tool requests the following OAuth scope:</p>
+<ul>
+<li><code>https://www.googleapis.com/auth/youtube.upload</code> — required for uploading videos.</li>
+<li><code>https://www.googleapis.com/auth/youtube.force-ssl</code> — required for attaching subtitles to uploaded videos.</li>
+</ul>
+<p>No other scope is requested. The Tool will not attempt to access data outside these scopes.</p>
+
+<h2>Data storage location</h2>
+<p>All data (source video files, generated assets, OAuth tokens) is stored locally on the developer's own machines. No cloud storage, no third-party server, no external data pipeline is involved. The Tool does not have a backend service.</p>
+
+<h2>Data transmission</h2>
+<p>The only external transmissions the Tool makes are:</p>
+<ul>
+<li>To Google's OAuth endpoints (<code>oauth2.googleapis.com</code>) — for token operations.</li>
+<li>To YouTube's video upload endpoints (<code>www.googleapis.com/upload/youtube/v3</code>) — for uploading the video file.</li>
+<li>To Pexels API (<code>api.pexels.com</code>) — for downloading royalty-free stock footage used in generated videos. This transmission does not include any Google user data.</li>
+</ul>
+
+<h2>Data retention and deletion</h2>
+<p>The Tool retains OAuth tokens only for as long as they are useful. To delete all stored data, the user can:</p>
+<ol>
+<li>Delete the token file: <code>rm ~/yt-autopilot/pipeline/config/yt_token.json</code></li>
+<li>Revoke the app's access in the Google Account settings: <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a></li>
+</ol>
+
+<h2>Children</h2>
+<p>The Tool is not directed at children under 13 and does not knowingly collect personal information from children.</p>
+
+<h2>Changes to this policy</h2>
+<p>Any changes to this policy will be posted here with an updated "Last updated" date. Material changes will require the user to re-authorize the Tool.</p>
+
+<h2>Contact</h2>
+<p>For questions or requests about this Privacy Policy:</p>
+<p><strong>Email:</strong> s.yuki.3622 [at] gmail.com</p>
+
+<footer>
+<p>© 2026 YT Autopilot. See <a href="index.html">Home</a> and <a href="terms.html">Terms of Service</a>.</p>
+</footer>
+
+</body>
+</html>

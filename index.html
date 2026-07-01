@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YT Autopilot — Automated Video Publishing for Content Creators</title>
+<meta name="description" content="YT Autopilot is a personal automation tool that helps content creators schedule and publish videos to their own YouTube channel on a regular cadence.">
+<style>
+  :root { --fg:#1a1a1a; --muted:#555; --accent:#2b6cb0; --bg:#ffffff; --card:#f7f7f9; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); line-height:1.6; max-width:780px; margin:0 auto; padding:2.5rem 1.5rem; }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.35rem; margin-top: 2.2rem; margin-bottom: 0.6rem; border-bottom: 1px solid #eee; padding-bottom: 0.3rem; }
+  h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.3rem; }
+  p, li { color: var(--fg); }
+  .lead { font-size: 1.15rem; color: var(--muted); margin-bottom: 1.8rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--card); padding: 1rem 1.2rem; border-radius: 8px; margin: 1rem 0; }
+  code { background: #eef; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  nav { margin-bottom: 2rem; }
+  nav a { margin-right: 1rem; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee; color: var(--muted); font-size: 0.9rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid #ddd; padding: 0.5rem 0.8rem; text-align: left; }
+  th { background: #f0f0f0; }
+</style>
+</head>
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms of Service</a>
+</nav>
+
+<h1>YT Autopilot</h1>
+<p class="lead">A personal automation tool for content creators that schedules and publishes videos to your own YouTube channel on a regular cadence.</p>
+
+<div class="card">
+<strong>Status:</strong> Personal use by developer. Source is not currently distributed publicly.<br>
+<strong>Scope requested:</strong> <code>youtube.upload</code> (and read scopes for verification)<br>
+<strong>Contact:</strong> s.yuki.3622 [at] gmail.com
+</div>
+
+<h2>What it does</h2>
+<p>YT Autopilot is a workflow tool that automates the tedious parts of maintaining a scheduled content calendar on YouTube:</p>
+<ul>
+<li>Generates video assets (voice narration, stock footage assembly, thumbnails) from a script file the creator writes.</li>
+<li>Uploads the assembled video to the creator's own YouTube channel using the YouTube Data API.</li>
+<li>Sets a scheduled publish time (<code>publishAt</code>) so videos go live at a consistent cadence.</li>
+<li>Runs on a schedule (every two weeks) so the creator does not have to remember to upload.</li>
+</ul>
+<p>The tool is used by the developer to maintain a personal Claude Code tutorials channel with a regular posting cadence.</p>
+
+<h2>Why the youtube.upload scope</h2>
+<p>The tool needs to upload finished video files to the authenticated user's YouTube channel. That requires the <code>https://www.googleapis.com/auth/youtube.upload</code> scope. No other write scope is used.</p>
+
+<h3>What data the tool reads</h3>
+<table>
+<tr><th>API</th><th>Purpose</th></tr>
+<tr><td><code>videos.insert</code></td><td>Upload video file + set metadata (title, description, tags, publishAt)</td></tr>
+<tr><td><code>captions.insert</code></td><td>Attach multilingual subtitles to uploaded videos (when applicable)</td></tr>
+</table>
+
+<h3>What data the tool does NOT touch</h3>
+<ul>
+<li>Any other user's channel or videos</li>
+<li>Comments, playlists, subscriptions, or analytics</li>
+<li>Personal information beyond the OAuth token issued for upload</li>
+</ul>
+
+<h2>How OAuth is used</h2>
+<ol>
+<li>The user runs a local command <code>bash auth_youtube.sh</code>.</li>
+<li>The browser opens the standard Google OAuth consent page.</li>
+<li>The user grants <code>youtube.upload</code> scope.</li>
+<li>The tool stores the refresh token in a local file with <code>chmod 600</code> permissions (owner read-only).</li>
+<li>The tool uses the refresh token to request access tokens for upload operations only.</li>
+<li>The token is never transmitted anywhere except to Google's own OAuth endpoints.</li>
+</ol>
+
+<h2>Deployment</h2>
+<p>The tool runs on the developer's own hardware (Mac and Windows machines on a private LAN). No cloud service, no third-party server, no data hosting. All processing is local.</p>
+
+<h2>Contact</h2>
+<p>For questions about scope usage, data handling, or verification requests:</p>
+<p><strong>Developer:</strong> ys<br>
+<strong>Email:</strong> s.yuki.3622 [at] gmail.com<br>
+<strong>Verification response time:</strong> Within 3 business days
+</p>
+
+<footer>
+<p>© 2026 YT Autopilot. Personal automation tool. See <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+</footer>
+
+</body>
+</html>
